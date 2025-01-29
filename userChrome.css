@@ -1,0 +1,85 @@
+/* Example userChrome.css file */
+
+/* Import your desired components first */
+
+@import url(chrome/tabs_on_bottom_v2.css);
+
+/* Apply your custom modifications after imports */
+
+#nav-bar {
+  height: 37px;
+}
+
+/* Toolbar Flexible Space adjustment */
+
+/*
+toolbarspring {
+    min-width: 20px !important;
+    max-width: 20px !important;
+}
+
+toolbarpaletteitem[place="toolbar"][id^="wrapper-customizableui-special-spring"] {
+    flex: unset !important
+}
+
+toolbarpaletteitem {
+    &[place="palette"] {
+        align-items: center;
+    }
+}
+*/
+
+/* Hide the hamburger button */
+/*
+#PanelUI-menu-button {
+    display: none !important;
+}
+*/
+
+/*** Tighten up drop-down/context/popup menu spacing (8 Sep 2021) ***/
+menupopup:not(.in-menulist)>menuitem,
+menupopup:not(.in-menulist)>menu {
+  padding-block: 4px !important;
+  /* reduce to 3px, 2px, 1px or 0px as needed */
+  min-height: unset !important;
+  /* v92.0 - for padding below 4px */
+}
+
+:root {
+  --arrowpanel-menuitem-padding: 4px 8px !important;
+}
+
+/* Always show reader mode button */
+#reader-mode-button {
+  display: flex !important;
+}
+
+/* Show menu bar in full screen */
+:root[inFullscreen]:not([macOSNativeFullscreen]) toolbar:not([fullscreentoolbar="true"]),
+:root[inFullscreen] .global-notificationbox {
+  visibility: unset !important;
+  height: 19px !important;
+}
+
+@media not (-moz-bool-pref: "sidebar.verticalTabs") {
+  :root[sizemode="fullscreen"] #nav-bar>.titlebar-buttonbox-container {
+    display: none !important;
+  }
+}
+
+toolbox:has(menu[open="true"]) {
+  margin-top: 0 !important;
+}
+
+
+/* Hide tabs with one tab with animation */
+#TabsToolbar {
+  transition: 500ms cubic-bezier(.22,.61,.36,1) !important; /* Cubic ease-out */
+  max-height: 50px !important;
+  overflow: hidden;
+}
+
+#TabsToolbar:has(.tabbrowser-tab:only-of-type),
+#TabsToolbar:has(.tabbrowser-tab[first-visible-tab="true"][last-visible-tab="true"]) {
+  max-height: 0 !important;
+}
