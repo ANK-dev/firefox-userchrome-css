@@ -74,12 +74,22 @@ toolbox:has(menu[open="true"]) {
 
 /* Hide tabs with one tab with animation */
 #TabsToolbar {
-  transition: 500ms cubic-bezier(.22,.61,.36,1) !important; /* Cubic ease-out */
+  transition: 500ms cubic-bezier(.22, .61, .36, 1) 1s !important; /* Cubic ease-out */
   max-height: 50px !important;
   overflow: hidden;
-}
 
-#TabsToolbar:has(.tabbrowser-tab:only-of-type),
-#TabsToolbar:has(.tabbrowser-tab[first-visible-tab="true"][last-visible-tab="true"]) {
-  max-height: 0 !important;
+  &:has(.tabbrowser-tab:only-of-type),
+  &:has(.tabbrowser-tab[first-visible-tab="true"][last-visible-tab="true"]) {
+    max-height: 0 !important;
+
+    #navigator-toolbox:hover & {
+      max-height: 50px !important;
+      transition-duration: 200ms !important;
+    }
+  }
+
+  &:not(:has(.tabbrowser-tab:only-of-type)):not(:has(.tabbrowser-tab[first-visible-tab="true"][last-visible-tab="true"])) {
+    transition-duration: 500ms !important;
+  }
+
 }
